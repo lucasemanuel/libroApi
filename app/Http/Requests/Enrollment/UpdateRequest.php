@@ -3,16 +3,11 @@
 namespace App\Http\Requests\Enrollment;
 
 use App\Enums\EnrollmentStatus;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateRequest extends FormRequest
+class UpdateRequest extends CustomRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [

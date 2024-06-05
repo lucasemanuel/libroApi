@@ -21,11 +21,8 @@ class EnrollmentController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $registrationAlreadyExists = Enrollment::where($request->safe()->all())->exists();
-        abort_if($registrationAlreadyExists, 400, 'The student is already enrolled in this course.');
-
         $enrollment = Enrollment::create([
-            ...$request->safe()->all(),
+             ...$request->safe()->all(),
             'status' => EnrollmentStatus::Actived,
         ]);
 

@@ -2,15 +2,10 @@
 
 namespace App\Http\Requests\Course;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomRequest;
 
-class UpdateRequest extends FormRequest
+class UpdateRequest extends CustomRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [

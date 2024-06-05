@@ -2,19 +2,21 @@
 
 namespace App\Http\Requests\Enrollment;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomRequest;
+use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class StoreRequest extends CustomRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
-            'student_id' => 'required|exists:students,id',
+            'student_id' => [
+                'required',
+                'exists:students,id',
+                Rule::unique('enrollments')->where(function ($query) {
+                    return $query->where('student_id', $this->student_id)->where('course_id', $this->course_id);
+                }),
+            ],
             'course_id' => 'required|exists:courses,id',
         ];
     }

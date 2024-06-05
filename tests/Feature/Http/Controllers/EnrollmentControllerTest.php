@@ -18,12 +18,12 @@ class EnrollmentControllerTest extends TestCase
     {
         $response = $this->getJson('/api/statistics/enrollments');
         $response->assertOk(200);
-        $response->assertJson(fn (AssertableJson $json) => $json
-            ->where('less_than_15', [])
-            ->where('between_15_and_18', [])
-            ->where('between_19_and_24', [])
-            ->where('between_25_and_30', [])
-            ->where('more_than_30', [])
+        $response->assertJson(fn(AssertableJson $json) => $json
+                ->where('less_than_15', [])
+                ->where('between_15_and_18', [])
+                ->where('between_19_and_24', [])
+                ->where('between_25_and_30', [])
+                ->where('more_than_30', [])
         );
     }
 
@@ -39,8 +39,8 @@ class EnrollmentControllerTest extends TestCase
 
         $response = $this->postJson('/api/enrollments', [
             'student_id' => $student->id,
-            'course_id' => $course->id
+            'course_id' => $course->id,
         ]);
-        $response->assertBadRequest();
+        $response->assertUnprocessable();
     }
 }
